@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from "./product";
+import { Router} from "@angular/router";
 
 
 @Component({
@@ -37,9 +38,12 @@ export class ProductComponent implements OnInit {
       image: "../../assets/vivo"
     }];
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
 
+  onClick(product : Product) {
+    this.router.navigate(['/Product', product.id]);
+  }
 }
