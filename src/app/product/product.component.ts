@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from "./product";
 import { Router} from "@angular/router";
+import { DataService } from "../services/data.service";
 
 
 @Component({
@@ -9,38 +10,15 @@ import { Router} from "@angular/router";
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  public products: Product[] = [{
-    id: 1,
-    name: "Nokia 5.1 Plus",
-    price: 899,
-    description: "Nokia 3GB/32GB",
-    image: "../../assets/nokia"
-  },
-    {
-      id: 2,
-      name: "Samsung A10s",
-      price: 1099,
-      description: "Samsung 32GB/64GB",
-      image: "../../assets/samsung"
-    },
-    {
-      id: 3,
-      name: "Redmi Mi note 5 pro",
-      price: 1299,
-      description: "Redmi Mi note 64GB/128GB",
-      image: "../../assets/redmi"
-    },
-    {
-      id: 4,
-      name: "Vivo Y2",
-      price: 950,
-      description: "Vivo 32GB/64GB",
-      image: "../../assets/vivo"
-    }];
+  public products: Product[] = [];
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private service: DataService) { }
 
   ngOnInit(): void {
+    this.service.getProducts().subscribe((response) => {
+      this.products = response;
+      console.log(this.products)
+    });
   }
 
   onClick(product : Product) {

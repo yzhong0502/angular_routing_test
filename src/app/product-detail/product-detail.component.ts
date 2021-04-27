@@ -9,17 +9,10 @@ import {DataService} from "../services/data.service";
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-  public products: Product[] = [];
-  public product: Product;
+  public product: any;
   public id : number;
 
   constructor(private route: ActivatedRoute, private service: DataService) {
-    this.getData();
-    while (this.products.length == 0) {
-      setTimeout(()=>{ //deal with asyn data
-        console.log('waiting for data...')
-      },100);
-    }
     let para = this.route.snapshot.paramMap.get('id');
     if (para == null) {
       this.id = -1;
@@ -27,15 +20,15 @@ export class ProductDetailComponent implements OnInit {
     } else {
       this.id = parseInt(para);
     }
-    this.product = this.products[this.id - 1];
+    this.getData();
   }
 
   ngOnInit(): void {}
 
   getData(): void {
     this.service.getProducts().subscribe((response) => {
-      this.products = response;
-      console.log(response)
+      this.product = response[this.id-1];
+      console.log(this.product)
     });
   }
 

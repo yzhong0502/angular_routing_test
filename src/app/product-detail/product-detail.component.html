@@ -1,7 +1,6 @@
 <div class="container">
   <div class="row clearfix">
-    <div class="col-md-6 column">
-      <h2>Find id = {{id}}</h2>
+    <div class="col-md-4 column">
       <h3>
         {{product.name}}
       </h3>
@@ -10,8 +9,11 @@
         {{product.description}}
       </p>
     </div>
-    <div class="col-md-6 column">
-      <img src="{{product.image}}" />
+    <div class="col-md-4 column">
+      <img src="{{product.image}}" alt="image of {{product.name}}" width="500" height="500"/>
     </div>
+  </div>
+  <div class="row">
+    <a [routerLink]="['/Back']">Go To Products List</a>
   </div>
 </div>
